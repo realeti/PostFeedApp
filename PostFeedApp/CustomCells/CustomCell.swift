@@ -8,7 +8,12 @@
 import UIKit
 
 class CustomCell: UITableViewCell {
-
+    
+    @IBOutlet weak var postNameLabel: UILabel!
+    @IBOutlet weak var postPreviewTextLabel: UILabel!
+    @IBOutlet weak var postLikesCountLabel: UILabel!
+    @IBOutlet weak var postDateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
