@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PostName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIk-Xl-ukA">
-                        <rect key="frame" x="16" y="5" width="288" height="30"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                        <rect key="frame" x="16" y="5" width="288" height="24"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="PostPreviewText" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvQ-gv-72t">
-                        <rect key="frame" x="16" y="35" width="288" height="47"/>
+                        <rect key="frame" x="16" y="34" width="288" height="42"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
@@ -52,17 +52,17 @@
                     <constraint firstAttribute="bottom" secondItem="FWr-HW-DPE" secondAttribute="bottom" constant="10" id="N9L-X6-UgL"/>
                     <constraint firstItem="gvQ-gv-72t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NRf-2C-Ld5"/>
                     <constraint firstAttribute="bottom" secondItem="xZi-SJ-83G" secondAttribute="bottom" constant="10" id="OO1-Md-4Z8"/>
-                    <constraint firstItem="FWr-HW-DPE" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="10" id="YvF-DZ-fef"/>
+                    <constraint firstItem="FWr-HW-DPE" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="16" id="YvF-DZ-fef"/>
                     <constraint firstItem="FIk-Xl-ukA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ayf-vF-WkH"/>
                     <constraint firstAttribute="bottom" secondItem="jVC-VA-a3f" secondAttribute="bottom" constant="10" id="b14-Gq-hL0"/>
                     <constraint firstItem="FWr-HW-DPE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="kbI-2E-9ZQ"/>
                     <constraint firstAttribute="trailing" secondItem="jVC-VA-a3f" secondAttribute="trailing" constant="16" id="lAt-Ve-aNV"/>
-                    <constraint firstItem="xZi-SJ-83G" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="10" id="n46-ih-FK0"/>
+                    <constraint firstItem="xZi-SJ-83G" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="16" id="n46-ih-FK0"/>
                     <constraint firstAttribute="trailing" secondItem="gvQ-gv-72t" secondAttribute="trailing" constant="16" id="o1L-Ai-46O"/>
                     <constraint firstItem="FIk-Xl-ukA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="s0c-AQ-WLJ"/>
                     <constraint firstItem="xZi-SJ-83G" firstAttribute="leading" secondItem="FWr-HW-DPE" secondAttribute="trailing" constant="2" id="sPU-0p-dQg"/>
                     <constraint firstAttribute="trailing" secondItem="FIk-Xl-ukA" secondAttribute="trailing" constant="16" id="sTh-7l-PLu"/>
-                    <constraint firstItem="gvQ-gv-72t" firstAttribute="top" secondItem="FIk-Xl-ukA" secondAttribute="bottom" id="se0-Kq-Iet"/>
+                    <constraint firstItem="gvQ-gv-72t" firstAttribute="top" secondItem="FIk-Xl-ukA" secondAttribute="bottom" constant="5" id="se0-Kq-Iet"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

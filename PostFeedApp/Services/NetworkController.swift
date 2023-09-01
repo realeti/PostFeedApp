@@ -25,4 +25,18 @@ class NetworkController {
             }
         }
     }
+    
+    func fetchPostDetail(_ postId: Int, completion: @escaping (Result<PostDetailData, Error>) ->()) {
+        let path = "anton-natife/jsons/master/api/posts/\(postId).json"
+        let url = mainUrl.appending(path)
+        
+        AF.request(url).responseDecodable(of: PostFeedDetail.self) { responce in
+            switch responce.result {
+            case .success(let data):
+                completion(.success(data.post))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

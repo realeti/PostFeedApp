@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     
     private func setupUI() {
         title = "Posts"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         let customCellTypeNib = UINib(nibName: "CustomCell", bundle: nil)
         tableView.register(customCellTypeNib, forCellReuseIdentifier: "CustomCell")
@@ -48,6 +49,15 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            return
+        }
+        
+        detailVC.postId = postData[indexPath.row].postId
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
