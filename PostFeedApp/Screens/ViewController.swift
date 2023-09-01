@@ -67,14 +67,11 @@ extension ViewController: UITableViewDataSource {
         }
         
         let date = Date(timeIntervalSince1970: Double(postData[indexPath.row].timeshamp))
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = .current
-        let localDate = date.timeAgoDisplay()
         
         cell.postNameLabel.text = postData[indexPath.row].title
         cell.postPreviewTextLabel.text = postData[indexPath.row].previewText
         cell.postLikesCountLabel.text = String(postData[indexPath.row].likesCount)
-        cell.postDateLabel.text = localDate
+        cell.postDateLabel.text = date.timeAgoDisplay()
         
         return cell
     }
