@@ -17,16 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PostName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIk-Xl-ukA">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="PostName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIk-Xl-ukA">
                         <rect key="frame" x="16" y="5" width="288" height="24"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="PostPreviewText" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvQ-gv-72t">
-                        <rect key="frame" x="16" y="34" width="288" height="42"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWr-HW-DPE">
@@ -41,32 +35,54 @@
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PostDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVC-VA-a3f">
-                        <rect key="frame" x="241.33333333333334" y="92" width="62.666666666666657" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="PostDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVC-VA-a3f">
+                        <rect key="frame" x="16" y="34" width="288" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="PostPreviewText" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvQ-gv-72t">
+                        <rect key="frame" x="16" y="62" width="288" height="14"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JzU-PZ-Moa">
+                        <rect key="frame" x="212.66666666666666" y="81" width="97.333333333333343" height="29"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="See More">
+                            <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="buttonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BfR-0R-GaY"/>
+                            <action selector="expandButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpOutside" id="eD6-jc-bex"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="jVC-VA-a3f" secondAttribute="trailing" constant="16" id="9RW-3D-rTz"/>
+                    <constraint firstItem="gvQ-gv-72t" firstAttribute="top" secondItem="jVC-VA-a3f" secondAttribute="bottom" constant="10" id="DhM-ji-smF"/>
                     <constraint firstAttribute="bottom" secondItem="FWr-HW-DPE" secondAttribute="bottom" constant="10" id="N9L-X6-UgL"/>
                     <constraint firstItem="gvQ-gv-72t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NRf-2C-Ld5"/>
                     <constraint firstAttribute="bottom" secondItem="xZi-SJ-83G" secondAttribute="bottom" constant="10" id="OO1-Md-4Z8"/>
+                    <constraint firstAttribute="bottom" secondItem="JzU-PZ-Moa" secondAttribute="bottom" constant="10" id="QiL-mO-PKz"/>
                     <constraint firstItem="FWr-HW-DPE" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="16" id="YvF-DZ-fef"/>
                     <constraint firstItem="FIk-Xl-ukA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ayf-vF-WkH"/>
-                    <constraint firstAttribute="bottom" secondItem="jVC-VA-a3f" secondAttribute="bottom" constant="10" id="b14-Gq-hL0"/>
+                    <constraint firstItem="jVC-VA-a3f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cdX-gO-orq"/>
+                    <constraint firstItem="JzU-PZ-Moa" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="5" id="daW-hg-QLy"/>
+                    <constraint firstItem="jVC-VA-a3f" firstAttribute="top" secondItem="FIk-Xl-ukA" secondAttribute="bottom" constant="5" id="hPC-Pk-r9C"/>
                     <constraint firstItem="FWr-HW-DPE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="kbI-2E-9ZQ"/>
-                    <constraint firstAttribute="trailing" secondItem="jVC-VA-a3f" secondAttribute="trailing" constant="16" id="lAt-Ve-aNV"/>
                     <constraint firstItem="xZi-SJ-83G" firstAttribute="top" secondItem="gvQ-gv-72t" secondAttribute="bottom" constant="16" id="n46-ih-FK0"/>
                     <constraint firstAttribute="trailing" secondItem="gvQ-gv-72t" secondAttribute="trailing" constant="16" id="o1L-Ai-46O"/>
                     <constraint firstItem="FIk-Xl-ukA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="s0c-AQ-WLJ"/>
                     <constraint firstItem="xZi-SJ-83G" firstAttribute="leading" secondItem="FWr-HW-DPE" secondAttribute="trailing" constant="2" id="sPU-0p-dQg"/>
                     <constraint firstAttribute="trailing" secondItem="FIk-Xl-ukA" secondAttribute="trailing" constant="16" id="sTh-7l-PLu"/>
-                    <constraint firstItem="gvQ-gv-72t" firstAttribute="top" secondItem="FIk-Xl-ukA" secondAttribute="bottom" constant="5" id="se0-Kq-Iet"/>
+                    <constraint firstAttribute="trailing" secondItem="JzU-PZ-Moa" secondAttribute="trailing" constant="10" id="vaL-Ru-seo"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="button" destination="JzU-PZ-Moa" id="IgS-Ar-sRh"/>
                 <outlet property="postDateLabel" destination="jVC-VA-a3f" id="Q1D-pV-MF0"/>
                 <outlet property="postLikesCountLabel" destination="xZi-SJ-83G" id="Uy2-wS-Ov7"/>
                 <outlet property="postNameLabel" destination="FIk-Xl-ukA" id="U86-vz-OQ4"/>

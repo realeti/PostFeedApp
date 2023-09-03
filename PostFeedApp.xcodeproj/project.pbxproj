@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		99A65AE985B8450DD85C03A9 /* Pods_PostFeedApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C12AC3E691DFC7072EDB67 /* Pods_PostFeedApp.framework */; };
+		C682454D2AA476AD000A4431 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C682454C2AA476AD000A4431 /* FilterController.swift */; };
 		C69E81A32AA1031100D1060E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E81A12AA1031100D1060E /* CustomCell.swift */; };
 		C69E81A42AA1031100D1060E /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C69E81A22AA1031100D1060E /* CustomCell.xib */; };
 		C69E81A72AA10D5500D1060E /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E81A62AA10D5500D1060E /* NetworkController.swift */; };
@@ -26,6 +27,7 @@
 		3EF1394C7E98D0B3CF3ED8EF /* Pods-PostFeedApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PostFeedApp.debug.xcconfig"; path = "Target Support Files/Pods-PostFeedApp/Pods-PostFeedApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B2C12AC3E691DFC7072EDB67 /* Pods_PostFeedApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PostFeedApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A1A0275C43ECB0CA07FAC2 /* Pods-PostFeedApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PostFeedApp.release.xcconfig"; path = "Target Support Files/Pods-PostFeedApp/Pods-PostFeedApp.release.xcconfig"; sourceTree = "<group>"; };
+		C682454C2AA476AD000A4431 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		C69E81A12AA1031100D1060E /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		C69E81A22AA1031100D1060E /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		C69E81A62AA10D5500D1060E /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				C6B4D1932AA05F8F002C3AB4 /* ViewController.swift */,
 				C6A20D712AA23CA700C333D8 /* DetailViewController.swift */,
+				C682454C2AA476AD000A4431 /* FilterController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				C6B4D1902AA05F8F002C3AB4 /* AppDelegate.swift in Sources */,
 				C6A20D742AA240AD00C333D8 /* PostFeedDetail.swift in Sources */,
 				C69E81A32AA1031100D1060E /* CustomCell.swift in Sources */,
+				C682454D2AA476AD000A4431 /* FilterController.swift in Sources */,
 				C6B4D1922AA05F8F002C3AB4 /* SceneDelegate.swift in Sources */,
 				C6A20D722AA23CA700C333D8 /* DetailViewController.swift in Sources */,
 			);

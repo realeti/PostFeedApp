@@ -13,6 +13,9 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var postPreviewTextLabel: UILabel!
     @IBOutlet weak var postLikesCountLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!
+    @IBOutlet weak var button: UIButton!
+    
+    var buttonClicked: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +23,9 @@ class CustomCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        buttonClicked?()
     }
 }

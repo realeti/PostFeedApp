@@ -15,7 +15,8 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var postNameLabel: UILabel!
-    @IBOutlet weak var postTextLabel: UILabel!
+    //@IBOutlet weak var postTextLabel: UILabel!
+    @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postLikesCountLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!
     
@@ -26,10 +27,12 @@ class DetailViewController: UIViewController {
         loadNetworkData()
     }
     
-    private func setupUI() {
-        title = "Title"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = false
-        
+    }
+    
+    private func setupUI() {
         imageView.kf.indicatorType = .activity
     }
     
@@ -43,7 +46,7 @@ class DetailViewController: UIViewController {
                 }
                 
                 self.postNameLabel.text = data.title
-                self.postTextLabel.text = data.text
+                self.postTextView.text = data.text
                 self.postLikesCountLabel.text = String(data.likesCount)
                 
                 let date = Date(timeIntervalSince1970: Double(data.timeshamp))
