@@ -25,11 +25,14 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationItem.rightBarButtonItem?.image = UIImage(named: "icon-filter-bubbles")
     }
     
     private func setupUI() {
-        title = "Posts"
+        title = "Post Feed"
         
         let customCellTypeNib = UINib(nibName: "CustomCell", bundle: nil)
         tableView.register(customCellTypeNib, forCellReuseIdentifier: "CustomCell")
