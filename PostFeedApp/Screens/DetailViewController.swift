@@ -15,7 +15,6 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var postNameLabel: UILabel!
-    //@IBOutlet weak var postTextLabel: UILabel!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postLikesCountLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!

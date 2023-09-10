@@ -27,8 +27,6 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        navigationItem.rightBarButtonItem?.image = UIImage(named: "icon-filter-bubbles")
     }
     
     private func setupUI() {
@@ -62,16 +60,16 @@ class ViewController: UIViewController {
         }
         
         filterVC.sortType = { [unowned self] sort in
-            switch sort {
-            case 0:
+            guard let currentSortType = SortType(rawValue: sort) else { return }
+            
+            switch currentSortType {
+            case .newest:
                 postData.sort { $0.timeshamp > $1.timeshamp }
-                tableView.reloadData()
-            case 1:
+            case .rating:
                 postData.sort { $0.likesCount > $1.likesCount }
-                tableView.reloadData()
-            default:
-                return
             }
+            
+            tableView.reloadData()
         }
         
         present(filterVC, animated: true)
@@ -108,25 +106,25 @@ extension ViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let date = Date(timeIntervalSince1970: Double(postData[indexPath.row].timeshamp))
+        let postName = postData[indexPath.row].title
+        let postPreviewText = postData[indexPath.row].previewText
+        let postLikesCount = postData[indexPath.row].likesCount
+        let postDate = postData[indexPath.row].timeshamp
         
-        cell.postNameLabel.text = postData[indexPath.row].title
-        cell.postPreviewTextLabel.text = postData[indexPath.row].previewText
-        cell.postLikesCountLabel.text = String(postData[indexPath.row].likesCount)
-        cell.postDateLabel.text = date.timeAgoDisplay()
+        cell.configure(postName, postPreviewText, postLikesCount, postDate)
         
         if cell.postPreviewTextLabel.maxNumberOfLines <= 2 && !longCells.contains(indexPath.row) {
-            cell.button.isHidden = true
+            cell.expandedButton.isHidden = true
         } else {
-            cell.button.isHidden = false
+            cell.expandedButton.isHidden = false
             longCells.insert(indexPath.row)
             
             if expandedCells.contains(indexPath.row) {
                 cell.postPreviewTextLabel.numberOfLines = 0
-                cell.button.setTitle("See Less", for: .normal)
+                cell.expandedButton.setTitle("See Less", for: .normal)
             } else {
                 cell.postPreviewTextLabel.numberOfLines = 2
-                cell.button.setTitle("See More", for: .normal)
+                cell.expandedButton.setTitle("See More", for: .normal)
             }
         }
         
@@ -141,25 +139,5 @@ extension ViewController: UITableViewDataSource {
         }
         
         return cell
-    }
-}
-
-extension Date {
-    func timeAgoDisplay() -> String {
-        let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .full
-        
-        return formatter.localizedString(for: self, relativeTo: Date())
-    }
-}
-
-extension UILabel {
-    var maxNumberOfLines: Int {
-        let maxSize = CGSize(width: frame.size.width, height: CGFloat(MAXFLOAT))
-        let text = (self.text ?? "") as NSString
-        let textHeight = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [.font: font as Any], context: nil).height
-        let lineHeight = font.lineHeight
-        
-        return Int(ceil(textHeight / lineHeight)) - 1
     }
 }

@@ -81,7 +81,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="button" destination="JzU-PZ-Moa" id="IgS-Ar-sRh"/>
+                <outlet property="expandedButton" destination="JzU-PZ-Moa" id="spu-zb-obj"/>
                 <outlet property="postDateLabel" destination="jVC-VA-a3f" id="Q1D-pV-MF0"/>
                 <outlet property="postLikesCountLabel" destination="xZi-SJ-83G" id="Uy2-wS-Ov7"/>
                 <outlet property="postNameLabel" destination="FIk-Xl-ukA" id="U86-vz-OQ4"/>
