@@ -7,16 +7,16 @@
 
 import UIKit
 
-class FilterController: UITableViewController {
+class FilterViewController: UITableViewController {
+    
+    @IBOutlet weak var filterItemDate: UITableViewCell!
+    @IBOutlet weak var filterItemRating: UITableViewCell!
     
     var sortType: ((Int) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    @IBOutlet weak var filterItemDate: UITableViewCell!
-    @IBOutlet weak var filterItemRating: UITableViewCell!
     
     // MARK: - Table view data source
 
@@ -29,19 +29,19 @@ class FilterController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        sortType?(indexPath.row)
+        guard let currentSortType = SortType(rawValue: indexPath.row) else { return }
         
-        switch indexPath.row {
-        case 0:
+        sortType?(currentSortType.rawValue)
+        
+        switch currentSortType {
+        case .newest:
             filterItemDate.accessoryType = .checkmark
             filterItemRating.accessoryType = .none
-        case 1:
+        case .rating:
             filterItemDate.accessoryType = .none
             filterItemRating.accessoryType = .checkmark
-        default:
-            filterItemDate.accessoryType = .none
-            filterItemRating.accessoryType = .none
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

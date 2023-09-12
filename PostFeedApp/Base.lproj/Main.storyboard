@@ -37,7 +37,7 @@
                     <navigationItem key="navigationItem" id="QV3-Ka-3IE">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="icon-filter-bubbles" id="l5F-dn-sn5">
                             <connections>
-                                <action selector="filterButtonPressed:" destination="X1r-GL-hYM" id="XXx-jY-KQ2"/>
+                                <segue destination="imD-6H-6vZ" kind="presentation" modalTransitionStyle="flipHorizontal" id="aae-ah-v5W"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -153,14 +153,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CkH-rP-Nuy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2077" y="-271"/>
+            <point key="canvasLocation" x="2066" y="-117"/>
         </scene>
-        <!--Filter Controller-->
+        <!--Filter View Controller-->
         <scene sceneID="kEL-D0-FeG">
             <objects>
-                <tableViewController storyboardIdentifier="FilterController" id="imD-6H-6vZ" customClass="FilterController" customModule="PostFeedApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FilterController" id="imD-6H-6vZ" customClass="FilterViewController" customModule="PostFeedApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="EFd-ez-ZEy">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -216,6 +216,8 @@
                             <outlet property="delegate" destination="imD-6H-6vZ" id="z5i-pj-m6x"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="filterItemDate" destination="MGP-hv-oD4" id="Puc-mD-h0y"/>
                         <outlet property="filterItemRating" destination="S2q-YZ-McL" id="eQh-Sn-5Nx"/>

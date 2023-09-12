@@ -11,6 +11,7 @@ import Kingfisher
 class DetailViewController: UIViewController {
     
     let networkController = NetworkController()
+    let downloadImageController = DownloadImageController()
     var postId: Int = 0
 
     @IBOutlet weak var imageView: UIImageView!
@@ -36,41 +37,33 @@ class DetailViewController: UIViewController {
     }
     
     private func loadNetworkData() {
-        networkController.fetchPostDetail(postId) { result in
+        networkController.fetchPostDetail(postId) { [unowned self] result in
             do {
                 let data = try result.get()
-                
-                self.downloadImage(with: data.postImage) { image in
-                    self.imageView.image = image
-                }
-                
-                self.postNameLabel.text = data.title
-                self.postTextView.text = data.text
-                self.postLikesCountLabel.text = String(data.likesCount)
-                
-                let date = Date(timeIntervalSince1970: Double(data.timeshamp))
-                let formatter = DateFormatter()
-                formatter.dateFormat = "dd MMMM YYYY"
-                let postDate = formatter.string(from: date)
-                
-                self.postDateLabel.text = postDate
+                self.configureUI(data.title, data.text, data.likesCount, data.timeshamp, data.postImage)
             } catch {
                 print(error)
             }
         }
     }
     
-    private func downloadImage(with urlString: String, completion: @escaping (UIImage?) -> ()) {
-        guard let url = URL(string: urlString) else {
-            return completion(nil)
+    private func configureUI(_ postName: String, _ postText: String, _ postLikesCount: Int, _ postDate: Int, _ postImage: String) {
+        DispatchQueue.main.async {
+            let date = Date(timeIntervalSince1970: Double(postDate))
+            
+            self.postNameLabel.text = postName
+            self.postTextView.text = postText
+            self.postLikesCountLabel.text = String(postLikesCount)
+            self.postDateLabel.text = date.fullDateDisplay()
         }
         
-        imageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil) { result in
-            switch result {
-            case .success(let value):
-                completion(value.image)
-            case .failure:
-                completion(nil)
+        loadImage(image: postImage)
+    }
+    
+    private func loadImage(image: String) {
+        downloadImageController.downloadImage(with: image, for: imageView) { [unowned self] image in
+            DispatchQueue.main.async {
+                self.imageView.image = image
             }
         }
     }

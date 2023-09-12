@@ -25,19 +25,19 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupUI() {
-        title = "Post Feed"
+        title = Constants.mainTitle
         
-        let customCellTypeNib = UINib(nibName: "CustomCell", bundle: nil)
-        tableView.register(customCellTypeNib, forCellReuseIdentifier: "CustomCell")
+        let cellIdentifier = String(describing: CustomCell.self)
+        let customCellTypeNib = UINib(nibName: cellIdentifier, bundle: nil)
+        tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
     }
     
     private func loadNetworkData() {
-        networkController.fetchPosts { result in
+        networkController.fetchPosts { [unowned self] result in
             do {
                 let data = try result.get()
                 self.postData = data
@@ -52,27 +52,21 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard let filterVC = storyboard.instantiateViewController(withIdentifier: "FilterController") as? FilterController else {
-            return
-        }
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let filterVC = segue.destination as? FilterViewController else { return }
         filterVC.sortType = { [unowned self] sort in
             guard let currentSortType = SortType(rawValue: sort) else { return }
             
             switch currentSortType {
             case .newest:
-                postData.sort { $0.timeshamp > $1.timeshamp }
+                self.postData.sort { $0.timeshamp > $1.timeshamp }
             case .rating:
-                postData.sort { $0.likesCount > $1.likesCount }
+                self.postData.sort { $0.likesCount > $1.likesCount }
             }
             
-            tableView.reloadData()
+            self.tableView.reloadData()
+            self.presentedViewController?.dismiss(animated: true)
         }
-        
-        present(filterVC, animated: true)
     }
 }
 
@@ -80,9 +74,9 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.storyboardName, bundle: nil)
         
-        guard let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+        guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.detailViewControllerId) as? DetailViewController else {
             return
         }
         
@@ -102,7 +96,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as? CustomCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customCellId) as? CustomCell else {
             return UITableViewCell()
         }
         
@@ -121,10 +115,10 @@ extension ViewController: UITableViewDataSource {
             
             if expandedCells.contains(indexPath.row) {
                 cell.postPreviewTextLabel.numberOfLines = 0
-                cell.expandedButton.setTitle("See Less", for: .normal)
+                cell.expandedButton.setTitle(Constants.buttonTitleSeeLess, for: .normal)
             } else {
                 cell.postPreviewTextLabel.numberOfLines = 2
-                cell.expandedButton.setTitle("See More", for: .normal)
+                cell.expandedButton.setTitle(Constants.buttonTitleSeeMore, for: .normal)
             }
         }
         
@@ -135,7 +129,7 @@ extension ViewController: UITableViewDataSource {
                 expandedCells.insert(indexPath.row)
             }
             
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
         return cell
