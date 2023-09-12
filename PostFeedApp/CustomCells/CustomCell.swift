@@ -15,6 +15,7 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var expandedButton: UIButton!
     
+    let expandableCellStorage = ExpandableCellStorage()
     var buttonClicked: (() -> Void)?
     
     override func awakeFromNib() {

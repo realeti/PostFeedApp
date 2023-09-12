@@ -12,9 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let networkController = NetworkController()
+    let expandableCellStorage = ExpandableCellStorage()
     var postData: [PostData] = []
-    var expandedCells: IndexSet = []
-    var longCells: IndexSet = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +74,6 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let storyboard = UIStoryboard(name: Constants.storyboardName, bundle: nil)
-        
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.detailViewControllerId) as? DetailViewController else {
             return
         }
@@ -91,7 +89,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        postData.count
+        return postData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,29 +104,10 @@ extension ViewController: UITableViewDataSource {
         let postDate = postData[indexPath.row].timeshamp
         
         cell.configure(postName, postPreviewText, postLikesCount, postDate)
-        
-        if cell.postPreviewTextLabel.maxNumberOfLines <= 2 && !longCells.contains(indexPath.row) {
-            cell.expandedButton.isHidden = true
-        } else {
-            cell.expandedButton.isHidden = false
-            longCells.insert(indexPath.row)
-            
-            if expandedCells.contains(indexPath.row) {
-                cell.postPreviewTextLabel.numberOfLines = 0
-                cell.expandedButton.setTitle(Constants.buttonTitleSeeLess, for: .normal)
-            } else {
-                cell.postPreviewTextLabel.numberOfLines = 2
-                cell.expandedButton.setTitle(Constants.buttonTitleSeeMore, for: .normal)
-            }
-        }
+        expandableCellStorage.configureData(cell, for: indexPath)
         
         cell.buttonClicked = { [unowned self] in
-            if expandedCells.contains(indexPath.row) {
-                expandedCells.remove(indexPath.row)
-            } else {
-                expandedCells.insert(indexPath.row)
-            }
-            
+            expandableCellStorage.update(for: indexPath)
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         

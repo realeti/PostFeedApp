@@ -54,7 +54,6 @@
                         </buttonConfiguration>
                         <connections>
                             <action selector="buttonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BfR-0R-GaY"/>
-                            <action selector="expandButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpOutside" id="eD6-jc-bex"/>
                         </connections>
                     </button>
                 </subviews>

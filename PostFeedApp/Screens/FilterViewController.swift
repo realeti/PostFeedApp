@@ -29,8 +29,9 @@ class FilterViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let currentSortType = SortType(rawValue: indexPath.row) else { return }
+        tableView.deselectRow(at: indexPath, animated: true)
         
+        guard let currentSortType = SortType(rawValue: indexPath.row) else { return }
         sortType?(currentSortType.rawValue)
         
         switch currentSortType {
@@ -41,7 +42,5 @@ class FilterViewController: UITableViewController {
             filterItemDate.accessoryType = .none
             filterItemRating.accessoryType = .checkmark
         }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
