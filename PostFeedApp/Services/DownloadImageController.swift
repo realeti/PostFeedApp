@@ -13,12 +13,14 @@ class DownloadImageController {
             return completion(nil)
         }
         
-        imageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil) { result in
-            switch result {
-            case .success(let value):
-                completion(value.image)
-            case .failure:
-                completion(nil)
+        DispatchQueue.main.async {
+            imageView.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.7))], progressBlock: nil) { result in
+                switch result {
+                case .success(let value):
+                    completion(value.image)
+                case .failure:
+                    completion(nil)
+                }
             }
         }
     }

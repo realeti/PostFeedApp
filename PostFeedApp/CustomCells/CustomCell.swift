@@ -15,7 +15,6 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var expandedButton: UIButton!
     
-    let expandableCellStorage = ExpandableCellStorage()
     var buttonClicked: (() -> Void)?
     
     override func awakeFromNib() {
@@ -30,12 +29,22 @@ class CustomCell: UITableViewCell {
         buttonClicked?()
     }
     
-    func configure(_ postName: String, _ postPreviewText: String, _ postLikesCount: Int, _ postDate: Int ) {
+    func config(with postData: PostData, onExpand: @escaping () -> ()) {
+        let postName = postData.title
+        let postPreviewText = postData.previewText
+        let postLikesCount = postData.likesCount
+        let postDate = postData.timeshamp
+        
+        configure(postName, postPreviewText, postLikesCount, postDate)
+        buttonClicked = onExpand
+    }
+    
+    func configure(_ postName: String, _ postPreviewText: String, _ postLikesCount: Int, _ postDate: Int) {
         let date = Date(timeIntervalSince1970: Double(postDate))
         
         postNameLabel.text = postName
         postPreviewTextLabel.text = postPreviewText
         postLikesCountLabel.text = String(postLikesCount)
-        postDateLabel.text = date.timeAgoDisplay()
+        postDateLabel.text = date.fullDateDisplay
     }
 }

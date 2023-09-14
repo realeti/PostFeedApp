@@ -13,6 +13,7 @@ class FilterViewController: UITableViewController {
     @IBOutlet weak var filterItemRating: UITableViewCell!
     
     var sortType: ((Int) -> Void)?
+    //var currentSortType: SortType?
 
     override func viewDidLoad() {
         super.viewDidLoad()

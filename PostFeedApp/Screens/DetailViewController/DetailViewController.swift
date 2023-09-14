@@ -37,10 +37,10 @@ class DetailViewController: UIViewController {
     }
     
     private func loadNetworkData() {
-        networkController.fetchPostDetail(postId) { [unowned self] result in
+        networkController.fetchPostDetail(postId) { [weak self] result in
             do {
                 let data = try result.get()
-                self.configureUI(data.title, data.text, data.likesCount, data.timeshamp, data.postImage)
+                self?.configureUI(data.title, data.text, data.likesCount, data.timeshamp, data.postImage)
             } catch {
                 print(error)
             }
@@ -54,17 +54,15 @@ class DetailViewController: UIViewController {
             self.postNameLabel.text = postName
             self.postTextView.text = postText
             self.postLikesCountLabel.text = String(postLikesCount)
-            self.postDateLabel.text = date.fullDateDisplay()
+            self.postDateLabel.text = date.fullDateDisplay
         }
         
         loadImage(image: postImage)
     }
     
     private func loadImage(image: String) {
-        downloadImageController.downloadImage(with: image, for: imageView) { [unowned self] image in
-            DispatchQueue.main.async {
-                self.imageView.image = image
-            }
+        downloadImageController.downloadImage(with: image, for: imageView) { [weak self] image in
+            self?.imageView.image = image
         }
     }
 }

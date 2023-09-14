@@ -9,6 +9,7 @@ import Foundation
 
 struct Constants {
     static let storyboardName = "Main"
+    static let detailStroboardName = "DetailScreen"
     static let detailViewControllerId = "DetailViewController"
     static let customCellId = "CustomCell"
     static let mainTitle = "Post Feed"

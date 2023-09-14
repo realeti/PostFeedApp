@@ -30,41 +30,42 @@ class ViewController: UIViewController {
     private func setupUI() {
         title = Constants.mainTitle
         
-        let cellIdentifier = String(describing: CustomCell.self)
+        let cellIdentifier = Constants.customCellId
         let customCellTypeNib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
     }
     
     private func loadNetworkData() {
-        networkController.fetchPosts { [unowned self] result in
+        networkController.fetchPosts { [weak self] result in
             do {
                 let data = try result.get()
-                self.postData = data
+                self?.postData = data
             } catch {
-                self.postData = []
+                self?.postData = []
                 print(error)
             }
             
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let filterVC = segue.destination as? FilterViewController else { return }
-        filterVC.sortType = { [unowned self] sort in
+        
+        filterVC.sortType = { [weak self] sort in
             guard let currentSortType = SortType(rawValue: sort) else { return }
             
             switch currentSortType {
             case .newest:
-                self.postData.sort { $0.timeshamp > $1.timeshamp }
+                self?.postData.sort { $0.timeshamp > $1.timeshamp }
             case .rating:
-                self.postData.sort { $0.likesCount > $1.likesCount }
+                self?.postData.sort { $0.likesCount > $1.likesCount }
             }
             
-            self.tableView.reloadData()
-            self.presentedViewController?.dismiss(animated: true)
+            self?.tableView.reloadData()
+            self?.presentedViewController?.dismiss(animated: true)
         }
     }
 }
@@ -73,7 +74,7 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: Constants.storyboardName, bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.detailStroboardName, bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.detailViewControllerId) as? DetailViewController else {
             return
         }
@@ -98,18 +99,14 @@ extension ViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let postName = postData[indexPath.row].title
-        let postPreviewText = postData[indexPath.row].previewText
-        let postLikesCount = postData[indexPath.row].likesCount
-        let postDate = postData[indexPath.row].timeshamp
+        let postData = postData[indexPath.row]
         
-        cell.configure(postName, postPreviewText, postLikesCount, postDate)
-        expandableCellStorage.configureData(cell, for: indexPath)
-        
-        cell.buttonClicked = { [unowned self] in
-            expandableCellStorage.update(for: indexPath)
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        cell.config(with: postData) { [weak self] in
+            self?.expandableCellStorage.update(for: indexPath)
+            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
+        
+        expandableCellStorage.configureData(cell, for: indexPath)
         
         return cell
     }
