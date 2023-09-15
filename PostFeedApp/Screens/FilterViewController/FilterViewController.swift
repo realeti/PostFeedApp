@@ -12,11 +12,29 @@ class FilterViewController: UITableViewController {
     @IBOutlet weak var filterItemDate: UITableViewCell!
     @IBOutlet weak var filterItemRating: UITableViewCell!
     
-    var sortType: ((Int) -> Void)?
-    //var currentSortType: SortType?
+    weak var delegate: FilterViewControllerDelegate?
+    var currentSortType: SortType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    func setupUI() {
+        if let currentSortType {
+            configure(sortType: currentSortType)
+        }
+    }
+    
+    func configure(sortType: SortType) {
+        switch sortType {
+        case .newest:
+            filterItemDate.accessoryType = .checkmark
+            filterItemRating.accessoryType = .none
+        case .rating:
+            filterItemDate.accessoryType = .none
+            filterItemRating.accessoryType = .checkmark
+        }
     }
     
     // MARK: - Table view data source
@@ -31,17 +49,9 @@ class FilterViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         guard let currentSortType = SortType(rawValue: indexPath.row) else { return }
-        sortType?(currentSortType.rawValue)
         
-        switch currentSortType {
-        case .newest:
-            filterItemDate.accessoryType = .checkmark
-            filterItemRating.accessoryType = .none
-        case .rating:
-            filterItemDate.accessoryType = .none
-            filterItemRating.accessoryType = .checkmark
-        }
+        configure(sortType: currentSortType)
+        delegate?.sortPostData(sortType: currentSortType)
     }
 }

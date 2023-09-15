@@ -14,6 +14,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     let networkController = NetworkController()
     let expandableCellStorage = ExpandableCellStorage()
     var postData: [PostData] = []
+    var currentSortType: SortType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,19 +69,10 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let filterVC = segue.destination as? FilterViewController else { return }
+        filterVC.delegate = self
         
-        filterVC.sortType = { [weak self] sort in
-            guard let currentSortType = SortType(rawValue: sort) else { return }
-            
-            switch currentSortType {
-            case .newest:
-                self?.postData.sort { $0.timeshamp > $1.timeshamp }
-            case .rating:
-                self?.postData.sort { $0.likesCount > $1.likesCount }
-            }
-            
-            self?.tableView.reloadData()
-            self?.presentedViewController?.dismiss(animated: true)
+        if let currentSortType {
+            filterVC.currentSortType = currentSortType
         }
     }
 }
@@ -130,5 +122,21 @@ extension MainViewController: PostFeedCellDelegate {
     func buttonPressed(indexPath: IndexPath) {
         expandableCellStorage.update(for: indexPath)
         tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+}
+
+extension MainViewController: FilterViewControllerDelegate {
+    func sortPostData(sortType: SortType) {
+        switch sortType {
+        case .newest:
+            postData.sort { $0.timeshamp > $1.timeshamp }
+        case .rating:
+            postData.sort { $0.likesCount > $1.likesCount }
+        }
+        
+        currentSortType = sortType
+        
+        tableView.reloadData()
+        presentedViewController?.dismiss(animated: true)
     }
 }

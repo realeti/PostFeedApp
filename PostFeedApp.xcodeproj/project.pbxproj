@@ -16,6 +16,7 @@
 		C66CB0C22AAF9A74007F178D /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CB0C12AAF9A74007F178D /* LabelExtensions.swift */; };
 		C66CB0C42AAF9DF0007F178D /* DownloadImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CB0C32AAF9DF0007F178D /* DownloadImageController.swift */; };
 		C66F5CE12AB4CC5C0027EB71 /* PostFeedCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F5CE02AB4CC5C0027EB71 /* PostFeedCellDelegate.swift */; };
+		C66F5CE32AB4D98B0027EB71 /* FilterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F5CE22AB4D98B0027EB71 /* FilterViewControllerDelegate.swift */; };
 		C682454D2AA476AD000A4431 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C682454C2AA476AD000A4431 /* FilterViewController.swift */; };
 		C688A49B2AB489A700766424 /* NetErrorViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C688A49A2AB489A700766424 /* NetErrorViewControllerDelegate.swift */; };
 		C68EBA6C2AAFA40E00E5CA02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68EBA6B2AAFA40E00E5CA02 /* Constants.swift */; };
@@ -47,6 +48,7 @@
 		C66CB0C12AAF9A74007F178D /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		C66CB0C32AAF9DF0007F178D /* DownloadImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageController.swift; sourceTree = "<group>"; };
 		C66F5CE02AB4CC5C0027EB71 /* PostFeedCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFeedCellDelegate.swift; sourceTree = "<group>"; };
+		C66F5CE22AB4D98B0027EB71 /* FilterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C682454C2AA476AD000A4431 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		C688A49A2AB489A700766424 /* NetErrorViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetErrorViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C68EBA6B2AAFA40E00E5CA02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				C682454C2AA476AD000A4431 /* FilterViewController.swift */,
+				C66F5CE22AB4D98B0027EB71 /* FilterViewControllerDelegate.swift */,
 			);
 			path = FilterViewController;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				C69E81A92AA110E800D1060E /* PostFeed.swift in Sources */,
 				C6B4D1942AA05F8F002C3AB4 /* MainViewController.swift in Sources */,
 				C643384E2AAE1DDB00D70786 /* SortType.swift in Sources */,
+				C66F5CE32AB4D98B0027EB71 /* FilterViewControllerDelegate.swift in Sources */,
 				C6B4D1902AA05F8F002C3AB4 /* AppDelegate.swift in Sources */,
 				C6A20D742AA240AD00C333D8 /* PostFeedDetail.swift in Sources */,
 				C65DE60F2AB100500047D0B3 /* ExpandableCellStorage.swift in Sources */,
