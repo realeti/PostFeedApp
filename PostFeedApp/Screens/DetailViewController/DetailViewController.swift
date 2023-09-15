@@ -44,7 +44,6 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
                 let data = try result.get()
                 self?.configureUI(data.title, data.text, data.likesCount, data.timeshamp, data.postImage)
             } catch {
-                print(error.localizedDescription)
                 self?.showErrorScreen(error.localizedDescription)
             }
         }
@@ -58,6 +57,7 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
             }
             
             netErrorsVC.delegate = self
+            netErrorsVC.descriptionError = error
             self.navigationController?.pushViewController(netErrorsVC, animated: false)
         }
     }

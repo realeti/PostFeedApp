@@ -11,7 +11,7 @@ class ExpandableCellStorage {
     private var longCells: IndexSet = []
     var expandableCells: IndexSet = []
     
-    func configureData(_ cell: CustomCell, for indexPath: IndexPath) {
+    func configureData(_ cell: PostFeedCell, for indexPath: IndexPath) {
         if cell.postPreviewTextLabel.maxNumberOfLines <= 2 && !longCells.contains(indexPath.row) {
             cell.expandedButton.isHidden = true
         } else {

@@ -6,16 +6,17 @@
 //
 
 import Foundation
-import Alamofire
+
+enum NetErrors: Error {
+    case statusCode(Int)
+    case invalidURL
+    case invalidData
+    case badResponce
+    case wrongDecode
+    case connectionProblem
+}
 
 class NetworkController: PostsFetching, PostsDetailFetching {
-    
-    enum NetErrors: Error {
-        case statusCode(Int)
-        case invalidURL
-        case badResponce
-        case other
-    }
     
     let mainUrl = "https://raw.githubusercontent.com/"
     
@@ -34,8 +35,9 @@ class NetworkController: PostsFetching, PostsDetailFetching {
         request.allHTTPHeaderFields = headers
         
         let dataTask = session.dataTask(with: request) { data, response, error in
-            if let error {
-                completion(.failure(error))
+            if let _ = error {
+                completion(.failure(NetErrors.connectionProblem))
+                return
             }
             
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -51,7 +53,7 @@ class NetworkController: PostsFetching, PostsDetailFetching {
             }
             
             guard let data else {
-                completion(.failure(NetErrors.other))
+                completion(.failure(NetErrors.invalidData))
                 return
             }
             

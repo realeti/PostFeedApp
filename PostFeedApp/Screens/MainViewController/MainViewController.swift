@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, NetErrorViewControllerDelegate {
+class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -61,6 +61,7 @@ class ViewController: UIViewController, NetErrorViewControllerDelegate {
             }
             
             netErrorsVC.delegate = self
+            netErrorsVC.descriptionError = error
             self.navigationController?.pushViewController(netErrorsVC, animated: false)
         }
     }
@@ -84,7 +85,7 @@ class ViewController: UIViewController, NetErrorViewControllerDelegate {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -98,7 +99,7 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -109,19 +110,25 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customCellId) as? CustomCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.customCellId) as? PostFeedCell else {
             return UITableViewCell()
         }
         
         let postData = postData[indexPath.row]
         
-        cell.config(with: postData) { [weak self] in
-            self?.expandableCellStorage.update(for: indexPath)
-            self?.tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
+        cell.config(with: postData)
+        cell.cellIndexPath = indexPath
+        cell.delegate = self
         
         expandableCellStorage.configureData(cell, for: indexPath)
         
         return cell
+    }
+}
+
+extension MainViewController: PostFeedCellDelegate {
+    func buttonPressed(indexPath: IndexPath) {
+        expandableCellStorage.update(for: indexPath)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

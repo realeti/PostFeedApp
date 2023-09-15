@@ -15,6 +15,8 @@ class NetErrorViewController: UIViewController {
     
     weak var delegate: NetErrorViewControllerDelegate?
     
+    var descriptionError: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -27,8 +29,8 @@ class NetErrorViewController: UIViewController {
     
     private func setupUI() {
         titleErrorLabel.text = Constants.netErrorScreenTitle
-        descriptionErrorLabel.text = Constants.netErrorScreenDescription
-        buttonTitle.titleLabel?.text = Constants.netErrorScreenButtonTitle
+        buttonTitle.setTitle(Constants.netErrorScreenButtonTitle, for: .normal)
+        descriptionErrorLabel.text = descriptionError
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {

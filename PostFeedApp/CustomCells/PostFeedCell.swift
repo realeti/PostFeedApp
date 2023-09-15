@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomCell: UITableViewCell {
+class PostFeedCell: UITableViewCell {
     
     @IBOutlet weak var postNameLabel: UILabel!
     @IBOutlet weak var postPreviewTextLabel: UILabel!
@@ -15,7 +15,8 @@ class CustomCell: UITableViewCell {
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var expandedButton: UIButton!
     
-    var buttonClicked: (() -> Void)?
+    weak var delegate: PostFeedCellDelegate?
+    var cellIndexPath: IndexPath?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,17 +27,18 @@ class CustomCell: UITableViewCell {
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        buttonClicked?()
+        if let cellIndexPath {
+            delegate?.buttonPressed(indexPath: cellIndexPath)
+        }
     }
     
-    func config(with postData: PostData, onExpand: @escaping () -> ()) {
+    func config(with postData: PostData) {
         let postName = postData.title
         let postPreviewText = postData.previewText
         let postLikesCount = postData.likesCount
         let postDate = postData.timeshamp
         
         configure(postName, postPreviewText, postLikesCount, postDate)
-        buttonClicked = onExpand
     }
     
     func configure(_ postName: String, _ postPreviewText: String, _ postLikesCount: Int, _ postDate: Int) {
