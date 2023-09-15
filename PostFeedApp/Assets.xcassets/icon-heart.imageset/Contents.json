@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icons8-love-circled-48.png",
+      "filename" : "icon-heart.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,8 +17,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "original"
   }
 }

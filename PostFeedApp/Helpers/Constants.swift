@@ -15,6 +15,9 @@ struct Constants {
     static let mainTitle = "Post Feed"
     static let buttonTitleSeeMore = "See More"
     static let buttonTitleSeeLess = "See Less"
+    static let netErrorScreenTitle = "Wake up your connection !"
+    static let netErrorScreenDescription = "Your internet seems too slow to\n reach our server"
+    static let netErrorScreenButtonTitle = "TRY AGAIN"
     
     private init() {}
 }

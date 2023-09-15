@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     
     let networkController = NetworkController()
     let downloadImageController = DownloadImageController()
@@ -29,6 +29,8 @@ class DetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
@@ -36,14 +38,27 @@ class DetailViewController: UIViewController {
         imageView.kf.indicatorType = .activity
     }
     
-    private func loadNetworkData() {
+    func loadNetworkData() {
         networkController.fetchPostDetail(postId) { [weak self] result in
             do {
                 let data = try result.get()
                 self?.configureUI(data.title, data.text, data.likesCount, data.timeshamp, data.postImage)
             } catch {
-                print(error)
+                print(error.localizedDescription)
+                self?.showErrorScreen(error.localizedDescription)
             }
+        }
+    }
+    
+    func showErrorScreen(_ error: String) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "NetErrorScreen", bundle: nil)
+            guard let netErrorsVC = storyboard.instantiateViewController(withIdentifier: "NetErrorScreen") as? NetErrorViewController else {
+                return
+            }
+            
+            netErrorsVC.delegate = self
+            self.navigationController?.pushViewController(netErrorsVC, animated: false)
         }
     }
     

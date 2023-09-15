@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Net Error View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NetErrorScreen" id="Y6W-OH-hqX" customClass="NetErrorViewController" customModule="PostFeedApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sleeping_ghost" translatesAutoresizingMaskIntoConstraints="NO" id="iw6-UE-zfZ">
+                                <rect key="frame" x="98.333333333333329" y="159" width="196.33333333333337" height="196.66666666666663"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iw6-UE-zfZ" secondAttribute="height" multiplier="1:1" id="RX7-xE-iPC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wake up your connection !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oF-tz-eqi">
+                                <rect key="frame" x="0.0" y="370.66666666666669" width="393" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your internet seems too slow to reach our server" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-Es-JEd">
+                                <rect key="frame" x="8" y="414.66666666666669" width="377" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" systemColor="systemGray2Color"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ib-Vk-OJv">
+                                <rect key="frame" x="0.0" y="492.66666666666669" width="393" height="37.333333333333314"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="TRY AGAIN">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                    <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="feP-v0-8sA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8ib-Vk-OJv" secondAttribute="trailing" id="3We-C6-1Jy"/>
+                            <constraint firstItem="4oF-tz-eqi" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9zH-wF-V3A"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bPI-Es-JEd" secondAttribute="trailing" constant="8" id="Gim-bJ-sea"/>
+                            <constraint firstItem="4oF-tz-eqi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ofx-UE-3Oa"/>
+                            <constraint firstItem="8ib-Vk-OJv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Pj7-h4-VwL"/>
+                            <constraint firstItem="bPI-Es-JEd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="YgQ-1k-Avg"/>
+                            <constraint firstItem="bPI-Es-JEd" firstAttribute="top" secondItem="4oF-tz-eqi" secondAttribute="bottom" constant="20" id="ay4-ho-zfV"/>
+                            <constraint firstItem="iw6-UE-zfZ" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="1:2" id="d38-sG-fcA"/>
+                            <constraint firstItem="4oF-tz-eqi" firstAttribute="top" secondItem="iw6-UE-zfZ" secondAttribute="bottom" constant="15" id="eag-7X-9Ah"/>
+                            <constraint firstItem="bPI-Es-JEd" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="fu1-L0-bzh"/>
+                            <constraint firstItem="iw6-UE-zfZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="gY0-UA-qOB"/>
+                            <constraint firstItem="iw6-UE-zfZ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nxM-C0-3tp"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4oF-tz-eqi" secondAttribute="trailing" id="xUB-rZ-qSw"/>
+                            <constraint firstItem="8ib-Vk-OJv" firstAttribute="top" secondItem="bPI-Es-JEd" secondAttribute="bottom" constant="30" id="zUu-DF-bTf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonTitle" destination="8ib-Vk-OJv" id="ft7-oJ-8SC"/>
+                        <outlet property="descriptionErrorLabel" destination="bPI-Es-JEd" id="pVD-1V-793"/>
+                        <outlet property="titleErrorLabel" destination="4oF-tz-eqi" id="lia-ss-g98"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44" y="-2"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="sleeping_ghost" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

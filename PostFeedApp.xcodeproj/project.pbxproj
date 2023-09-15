@@ -16,6 +16,7 @@
 		C66CB0C22AAF9A74007F178D /* LabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CB0C12AAF9A74007F178D /* LabelExtensions.swift */; };
 		C66CB0C42AAF9DF0007F178D /* DownloadImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66CB0C32AAF9DF0007F178D /* DownloadImageController.swift */; };
 		C682454D2AA476AD000A4431 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C682454C2AA476AD000A4431 /* FilterViewController.swift */; };
+		C688A49B2AB489A700766424 /* NetErrorViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C688A49A2AB489A700766424 /* NetErrorViewControllerDelegate.swift */; };
 		C68EBA6C2AAFA40E00E5CA02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68EBA6B2AAFA40E00E5CA02 /* Constants.swift */; };
 		C69E81A32AA1031100D1060E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E81A12AA1031100D1060E /* CustomCell.swift */; };
 		C69E81A42AA1031100D1060E /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C69E81A22AA1031100D1060E /* CustomCell.xib */; };
@@ -32,6 +33,8 @@
 		C6B4D1942AA05F8F002C3AB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B4D1932AA05F8F002C3AB4 /* ViewController.swift */; };
 		C6B4D1992AA05F90002C3AB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6B4D1982AA05F90002C3AB4 /* Assets.xcassets */; };
 		C6B4D19C2AA05F90002C3AB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6B4D19A2AA05F90002C3AB4 /* LaunchScreen.storyboard */; };
+		C6BE01FD2AB4373F005E4184 /* NetErrorScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6BE01FC2AB4373F005E4184 /* NetErrorScreen.storyboard */; };
+		C6BE01FF2AB4375A005E4184 /* NetErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BE01FE2AB4375A005E4184 /* NetErrorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,7 @@
 		C66CB0C12AAF9A74007F178D /* LabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtensions.swift; sourceTree = "<group>"; };
 		C66CB0C32AAF9DF0007F178D /* DownloadImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageController.swift; sourceTree = "<group>"; };
 		C682454C2AA476AD000A4431 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		C688A49A2AB489A700766424 /* NetErrorViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetErrorViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C68EBA6B2AAFA40E00E5CA02 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C69E81A12AA1031100D1060E /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		C69E81A22AA1031100D1060E /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 		C6B4D1982AA05F90002C3AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6B4D19B2AA05F90002C3AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6B4D19D2AA05F90002C3AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6BE01FC2AB4373F005E4184 /* NetErrorScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NetErrorScreen.storyboard; sourceTree = "<group>"; };
+		C6BE01FE2AB4375A005E4184 /* NetErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetErrorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,7 @@
 		C6A20D6E2AA23C4800C333D8 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C6BE01FB2AB436FD005E4184 /* NetErrorController */,
 				C6A259542AB3638E009F1540 /* FilterViewController */,
 				C6A259532AB3636C009F1540 /* DetailViewController */,
 				C6A259522AB3634D009F1540 /* ViewController */,
@@ -195,6 +202,16 @@
 			path = PostFeedApp;
 			sourceTree = "<group>";
 		};
+		C6BE01FB2AB436FD005E4184 /* NetErrorController */ = {
+			isa = PBXGroup;
+			children = (
+				C6BE01FC2AB4373F005E4184 /* NetErrorScreen.storyboard */,
+				C6BE01FE2AB4375A005E4184 /* NetErrorViewController.swift */,
+				C688A49A2AB489A700766424 /* NetErrorViewControllerDelegate.swift */,
+			);
+			path = NetErrorController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -263,6 +280,7 @@
 				C604CCAB2AB323D0006D8606 /* Main.storyboard in Resources */,
 				C6B4D1992AA05F90002C3AB4 /* Assets.xcassets in Resources */,
 				C604CCA92AB32335006D8606 /* DetailScreen.storyboard in Resources */,
+				C6BE01FD2AB4373F005E4184 /* NetErrorScreen.storyboard in Resources */,
 				C69E81A42AA1031100D1060E /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +303,7 @@
 				C69E81A32AA1031100D1060E /* CustomCell.swift in Sources */,
 				C6A2595D2AB39868009F1540 /* PostFeedDetailDTO.swift in Sources */,
 				C682454D2AA476AD000A4431 /* FilterViewController.swift in Sources */,
+				C688A49B2AB489A700766424 /* NetErrorViewControllerDelegate.swift in Sources */,
 				C66CB0C42AAF9DF0007F178D /* DownloadImageController.swift in Sources */,
 				C66CB0C22AAF9A74007F178D /* LabelExtensions.swift in Sources */,
 				C6B4D1922AA05F8F002C3AB4 /* SceneDelegate.swift in Sources */,
@@ -293,6 +312,7 @@
 				C6A259562AB39354009F1540 /* PostFeedDTO.swift in Sources */,
 				C6A20D722AA23CA700C333D8 /* DetailViewController.swift in Sources */,
 				C66CB0BD2AAF94C1007F178D /* DateExtensions.swift in Sources */,
+				C6BE01FF2AB4375A005E4184 /* NetErrorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, NetErrorViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -35,19 +37,31 @@ class ViewController: UIViewController {
         tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
     }
     
-    private func loadNetworkData() {
+    func loadNetworkData() {
         networkController.fetchPosts { [weak self] result in
             do {
                 let data = try result.get()
                 self?.postData = data
             } catch {
                 self?.postData = []
-                print(error)
+                self?.showErrorScreen(error.localizedDescription)
             }
             
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
+        }
+    }
+    
+    func showErrorScreen(_ error: String) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "NetErrorScreen", bundle: nil)
+            guard let netErrorsVC = storyboard.instantiateViewController(withIdentifier: "NetErrorScreen") as? NetErrorViewController else {
+                return
+            }
+            
+            netErrorsVC.delegate = self
+            self.navigationController?.pushViewController(netErrorsVC, animated: false)
         }
     }
     
