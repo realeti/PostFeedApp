@@ -14,7 +14,6 @@ class NetErrorViewController: UIViewController {
     @IBOutlet weak var buttonTitle: UIButton!
     
     weak var delegate: NetErrorViewControllerDelegate?
-    
     var descriptionError: String = ""
     
     override func viewDidLoad() {

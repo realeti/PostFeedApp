@@ -56,8 +56,8 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     
     func showErrorScreen(_ error: String) {
         DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "NetErrorScreen", bundle: nil)
-            guard let netErrorsVC = storyboard.instantiateViewController(withIdentifier: "NetErrorScreen") as? NetErrorViewController else {
+            let storyboard = UIStoryboard(name: Constants.netErrorStoryboardName, bundle: nil)
+            guard let netErrorsVC = storyboard.instantiateViewController(withIdentifier: Constants.netErrorViewControllerId) as? NetErrorViewController else {
                 return
             }
             
