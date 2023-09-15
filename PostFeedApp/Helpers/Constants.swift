@@ -19,6 +19,8 @@ struct Constants {
     static let buttonTitleSeeLess = "See Less"
     static let netErrorScreenTitle = "Wake up your connection !"
     static let netErrorScreenButtonTitle = "TRY AGAIN"
+    static let postFeedHeartViewTag = 10
+    static let postFeedDetailHeartViewTag = 11
     
     private init() {}
 }

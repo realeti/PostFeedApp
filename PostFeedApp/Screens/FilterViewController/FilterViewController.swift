@@ -20,7 +20,7 @@ class FilterViewController: UITableViewController {
         setupUI()
     }
     
-    func setupUI() {
+    private func setupUI() {
         if let currentSortType {
             configure(sortType: currentSortType)
         }
