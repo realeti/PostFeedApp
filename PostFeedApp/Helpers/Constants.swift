@@ -21,6 +21,9 @@ struct Constants {
     static let netErrorScreenButtonTitle = "TRY AGAIN"
     static let postFeedHeartViewTag = 10
     static let postFeedDetailHeartViewTag = 11
+    static let coreDataModelName = "PostFeedDataModel"
+    static let postFeedEntityName = "PostFeedCD"
+    static let postFeedDetailEntityName = "PostFeedDetailCD"
     
     private init() {}
 }

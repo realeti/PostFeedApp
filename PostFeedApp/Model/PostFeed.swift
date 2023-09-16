@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostData {
+struct PostFeed {
     let postId: Int
     let timeshamp: Int
     let title: String

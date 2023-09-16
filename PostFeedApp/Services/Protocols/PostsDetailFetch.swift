@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol PostsDetailFetching {
+protocol PostDetailFetching {
     func fetchPostDetail(_ postId: Int, completion: @escaping (Result<PostFeedDetail, Error>) -> Void)
 }

@@ -40,7 +40,7 @@ class PostFeedCell: UITableViewCell {
         }
     }
     
-    func config(with postData: PostData) {
+    func config(with postData: PostFeed) {
         let postName = postData.title
         let postPreviewText = postData.previewText
         let postLikesCount = postData.likesCount
@@ -73,7 +73,7 @@ class PostFeedCell: UITableViewCell {
     
     private func setAnimation(viewTag: Int) {
         if viewTag == Constants.postFeedHeartViewTag {
-            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 4.0, initialSpringVelocity: 5.0, options: [.autoreverse]) {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 6.0, options: [.autoreverse]) {
                 self.heartImageBottomConstraint.constant = 15
                 self.heartImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 self.layoutIfNeeded()

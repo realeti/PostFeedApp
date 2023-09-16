@@ -16,7 +16,7 @@ enum NetErrors: Error {
     case connectionProblem
 }
 
-class NetworkController: PostsFetching, PostsDetailFetching {
+class NetworkController: PostsFetching, PostDetailFetching {
     
     let mainUrl = "https://raw.githubusercontent.com/"
     
@@ -67,17 +67,17 @@ class NetworkController: PostsFetching, PostsDetailFetching {
         fetchData(fullPath: urlString, completion: completion)
     }
     
-    func fetchPosts(completion: @escaping (Result<[PostData], Error>) -> Void) {
+    func fetchPosts(completion: @escaping (Result<[PostFeed], Error>) -> Void) {
         let path = "anton-natife/jsons/master/api/main.json"
         
         fetchData(path: path) { response in
             do {
                 let data = try response.get()
-                let responseData = try self.decoder.decode(PostFeedDTO.self, from: data)
+                let responseData = try self.decoder.decode(PostDTO.self, from: data)
                 let postsDto = responseData.posts
                 
                 let posts = postsDto.map { post in
-                    PostData(postId: post.postId,
+                    PostFeed(postId: post.postId,
                              timeshamp: post.timeshamp,
                              title: post.title,
                              previewText: post.previewText,
@@ -98,7 +98,7 @@ class NetworkController: PostsFetching, PostsDetailFetching {
         fetchData(path: path) { response in
             do {
                 let data = try response.get()
-                let responseData = try self.decoder.decode(PostFeedDetailDTO.self, from: data)
+                let responseData = try self.decoder.decode(PostDetailDTO.self, from: data)
                 let detailPostDto = responseData.post
                 
                 let detailPost = PostFeedDetail(postId: detailPostDto.postId,

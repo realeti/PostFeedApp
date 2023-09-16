@@ -10,7 +10,6 @@ import Kingfisher
 
 class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     
-    let networkController = NetworkController()
     let downloadImageController = DownloadImageController()
     var postId: Int = 0
 
@@ -21,6 +20,12 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var heartImage: UIImageView!
     @IBOutlet weak var heartImageBottomConstraint: NSLayoutConstraint!
+    
+    private lazy var fallbackController: PostDetailFallbackController = {
+        PostDetailFallbackController(
+            mainSource: NetworkController(),
+            reserveSource: CoreDataController.shared)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +47,16 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     }
     
     func loadNetworkData() {
-        networkController.fetchPostDetail(postId) { [weak self] result in
+        fallbackController.fetchPostDetail(postId) { [weak self] result in
             do {
-                let data = try result.get()
-                self?.configureUI(data.title, data.text, data.likesCount, data.timeshamp, data.postImage)
+                let post = try result.get()
+                self?.configureUI(
+                    post.title,
+                    post.text,
+                    post.likesCount,
+                    post.timeshamp,
+                    post.postImage
+                )
             } catch {
                 self?.showErrorScreen(error.localizedDescription)
             }
@@ -99,7 +110,7 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     
     private func setAnimation(viewTag: Int) {
         if viewTag == Constants.postFeedDetailHeartViewTag {
-            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 4.0, initialSpringVelocity: 5.0, options: [.autoreverse]) {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 6.0, options: [.autoreverse]) {
                 self.heartImageBottomConstraint.constant = 15
                 self.heartImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 self.view.layoutIfNeeded()

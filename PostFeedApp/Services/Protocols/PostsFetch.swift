@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PostsFetching {
-    func fetchPosts(completion: @escaping (Result<[PostData], Error>) -> Void)
+    func fetchPosts(completion: @escaping (Result<[PostFeed], Error>) -> Void)
 }

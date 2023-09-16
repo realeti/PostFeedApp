@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  PostFeedApp
 //
 //  Created by Apple M1 on 31.08.2023.
@@ -11,10 +11,15 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let networkController = NetworkController()
     let expandableCellStorage = ExpandableCellStorage()
-    var postData: [PostData] = []
+    var postData: [PostFeed] = []
     var currentSortType: SortType?
+    
+    private lazy var fallbackController: PostFallbackController = {
+        PostFallbackController(
+            mainSource: NetworkController(),
+            reserveSource: CoreDataController.shared)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +44,10 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     }
     
     func loadNetworkData() {
-        networkController.fetchPosts { [weak self] result in
+        fallbackController.fetchPosts { [weak self] result in
             do {
-                let data = try result.get()
-                self?.postData = data
+                let posts = try result.get()
+                self?.postData = posts
             } catch {
                 self?.postData = []
                 self?.showErrorScreen(error.localizedDescription)
