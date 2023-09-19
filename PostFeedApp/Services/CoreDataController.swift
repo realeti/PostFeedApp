@@ -61,7 +61,7 @@ final class CoreDataController: FetchData {
     }
     
     func fetchPosts(completion: @escaping (Result<[PostFeed], Error>) -> Void) {
-        let context = persistentContainer.viewContext
+        let context = persistentContainer.newBackgroundContext()
         let request = NSFetchRequest<PostFeedCD>(entityName: Constants.postFeedEntityName)
         
         do {
@@ -80,7 +80,6 @@ final class CoreDataController: FetchData {
                 completion(.failure(NetErrors.connectionProblem))
                 return
             }
-            
             completion(.success(posts))
         } catch {
             completion(.failure(error))
@@ -89,10 +88,21 @@ final class CoreDataController: FetchData {
     
     func storePosts(posts: [PostFeed]) {
         let context = persistentContainer.newBackgroundContext()
+        let request = NSFetchRequest<PostFeedCD>(entityName: Constants.postFeedEntityName)
+        let results = try? context.fetch(request)
         
         context.perform {
             posts.forEach { post in
-                let postFeedCD = PostFeedCD(context: context)
+                let postFeedCD: PostFeedCD!
+                request.predicate = NSPredicate(format: "title == %@", post.title)
+                
+                if results?.count == 0 {
+                    postFeedCD = PostFeedCD(context: context)
+                }
+                else {
+                    postFeedCD = results?.first
+                }
+                
                 postFeedCD.postId = Int32(post.postId)
                 postFeedCD.timeshamp = Int32(post.timeshamp)
                 postFeedCD.title = post.title
@@ -104,13 +114,13 @@ final class CoreDataController: FetchData {
     }
     
     func fetchPostDetail(_ postId: Int, completion: @escaping (Result<PostFeedDetail, Error>) -> Void) {
-        let context = persistentContainer.viewContext
+        let context = persistentContainer.newBackgroundContext()
         let request = NSFetchRequest<PostFeedDetailCD>(entityName: Constants.postFeedDetailEntityName)
         request.returnsObjectsAsFaults = false
         
         do {
-            let postDetailObjecs = try context.fetch(request)
-            let postDetail = postDetailObjecs.filter({$0.postId == postId}).map { data in
+            let results = try context.fetch(request)
+            let postDetail = results.filter({$0.postId == postId}).map { data in
                 PostFeedDetail(
                     postId: Int(data.postId),
                     timeshamp: Int(data.timeshamp),
@@ -134,22 +144,27 @@ final class CoreDataController: FetchData {
     
     func storeDetailPost(post: PostFeedDetail) {
         let context = persistentContainer.newBackgroundContext()
-        let entity = NSEntityDescription.entity(forEntityName: Constants.postFeedDetailEntityName, in: context)
+        let request = NSFetchRequest<PostFeedDetailCD>(entityName: Constants.postFeedDetailEntityName)
+        request.predicate = NSPredicate(format: "title == %@", post.title)
         
-        guard let entity = entity else {
-            return
+        let results = try? context.fetch(request)
+        let postFeedDetailCD: PostFeedDetailCD!
+        
+        if results?.count == 0 {
+            postFeedDetailCD = PostFeedDetailCD(context: context)
+        } else {
+            postFeedDetailCD = results?.first
         }
-        
-        let newPost = NSManagedObject(entity: entity, insertInto: context)
         
         context.perform {
-            newPost.setValue(post.postId, forKey: "postId")
-            newPost.setValue(post.timeshamp, forKey: "timeshamp")
-            newPost.setValue(post.title, forKey: "title")
-            newPost.setValue(post.text, forKey: "text")
-            newPost.setValue(post.postImage, forKey: "postImage")
-            newPost.setValue(post.likesCount, forKey: "likesCount")
+            postFeedDetailCD.postId = Int32(post.postId)
+            postFeedDetailCD.timeshamp = Int32(post.timeshamp)
+            postFeedDetailCD.title = post.title
+            postFeedDetailCD.text = post.text
+            postFeedDetailCD.postImage = post.postImage
+            postFeedDetailCD.likesCount = Int32(post.likesCount)
+            
+            try? context.save()
         }
-        try? context.save()
     }
 }
