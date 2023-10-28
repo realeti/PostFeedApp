@@ -8,18 +8,24 @@
 import UIKit
 
 class ExpandableCellStorage {
-    private var longCells: IndexSet = []
     var expandableCells: IndexSet = []
+    var cellWidths: [Int: CGFloat] = [:]
     
-    func configureData(_ cell: PostFeedCell, for indexPath: IndexPath) {
-        if cell.postPreviewTextLabel.maxNumberOfLines <= 2 && !longCells.contains(indexPath.row) {
+    func configureData(_ cell: PostFeedCell, for postId: Int, _ viewWidth: CGFloat, _ maxCells: Int) {
+        if cellWidths[postId] == nil {
+            let intrinsicPreviewTextWidth = cell.postPreviewTextLabel.intrinsicContentSize.width
+            cellWidths[postId] = intrinsicPreviewTextWidth
+        }
+        
+        let cellWidth = cellWidths[postId] ?? 0
+        
+        if cellWidth < viewWidth * 2 {
             cell.expandedButton.isHidden = true
         } else {
             cell.expandedButton.isHidden = false
-            longCells.insert(indexPath.row)
             
-            if expandableCells.contains(indexPath.row) {
-                cell.postPreviewTextLabel.numberOfLines = 0
+            if expandableCells.contains(postId) {
+                cell.postPreviewTextLabel.numberOfLines = 5
                 cell.expandedButton.setTitle(Constants.buttonTitleSeeLess, for: .normal)
             } else {
                 cell.postPreviewTextLabel.numberOfLines = 2
@@ -28,11 +34,11 @@ class ExpandableCellStorage {
         }
     }
     
-    func update(for indexPath: IndexPath) {
-        if expandableCells.contains(indexPath.row) {
-            expandableCells.remove(indexPath.row)
+    func update(for postId: Int) {
+        if expandableCells.contains(postId) {
+            expandableCells.remove(postId)
         } else {
-            expandableCells.insert(indexPath.row)
+            expandableCells.insert(postId)
         }
     }
 }

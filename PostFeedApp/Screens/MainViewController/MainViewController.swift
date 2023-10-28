@@ -111,21 +111,24 @@ extension MainViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let postData = postData[indexPath.row]
+        let currentPost = postData[indexPath.row]
+        let postId = currentPost.postId
         
-        cell.config(with: postData)
+        cell.config(with: currentPost)
         cell.cellIndexPath = indexPath
+        cell.postId = postId
         cell.delegate = self
         
-        expandableCellStorage.configureData(cell, for: indexPath)
+        let viewWidth = self.view.frame.size.width - 32 // leading & trailling it's 16 + 16
+        expandableCellStorage.configureData(cell, for: postId, viewWidth, postData.count)
         
         return cell
     }
 }
 
 extension MainViewController: PostFeedCellDelegate {
-    func buttonPressed(indexPath: IndexPath) {
-        expandableCellStorage.update(for: indexPath)
+    func buttonPressed(indexPath: IndexPath, postId: Int) {
+        expandableCellStorage.update(for: postId)
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PostFeedCellDelegate: AnyObject {
-    func buttonPressed(indexPath: IndexPath)
+    func buttonPressed(indexPath: IndexPath, postId: Int)
 }

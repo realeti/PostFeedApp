@@ -18,7 +18,7 @@ enum NetErrors: Error {
 
 class NetworkController: PostsFetching, PostDetailFetching {
     
-    let mainUrl = "https://raw.githubusercontent.com/"
+    let mainUrl = "https://realeti.github.io/sample-jsons/"
     
     let session = URLSession.shared
     let headers = ["accept": "application/json"]
@@ -68,7 +68,7 @@ class NetworkController: PostsFetching, PostDetailFetching {
     }
     
     func fetchPosts(completion: @escaping (Result<[PostFeed], Error>) -> Void) {
-        let path = "anton-natife/jsons/master/api/main.json"
+        let path = "postfeed-api/main.json"
         
         fetchData(path: path) { response in
             do {
@@ -93,7 +93,7 @@ class NetworkController: PostsFetching, PostDetailFetching {
     }
     
     func fetchPostDetail(_ postId: Int, completion: @escaping (Result<PostFeedDetail, Error>) -> Void) {
-        let path = "anton-natife/jsons/master/api/posts/\(postId).json"
+        let path = "postfeed-api/posts/\(postId).json"
         
         fetchData(path: path) { response in
             do {
