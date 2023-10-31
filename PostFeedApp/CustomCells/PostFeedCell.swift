@@ -20,6 +20,7 @@ class PostFeedCell: UITableViewCell {
     weak var delegate: PostFeedCellDelegate?
     var cellIndexPath: IndexPath?
     var postId: Int?
+    var countOfLines = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -90,5 +91,12 @@ class PostFeedCell: UITableViewCell {
                 postLikesCountLabel.text = String(currentLikesCount)
             }
         }
+    }
+    
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        return super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
     }
 }

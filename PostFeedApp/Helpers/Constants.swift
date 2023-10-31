@@ -24,6 +24,9 @@ struct Constants {
     static let coreDataModelName = "PostFeedDataModel"
     static let postFeedEntityName = "PostFeedCD"
     static let postFeedDetailEntityName = "PostFeedDetailCD"
+    static let filterMenuTitle = "Sort by"
+    static let filterMenuRatingName = "Rating"
+    static let filterMenuDateName = "Newest to oldest"
     
     private init() {}
 }

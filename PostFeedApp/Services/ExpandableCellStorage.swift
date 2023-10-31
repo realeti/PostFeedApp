@@ -11,7 +11,7 @@ class ExpandableCellStorage {
     var expandableCells: IndexSet = []
     var cellWidths: [Int: CGFloat] = [:]
     
-    func configureData(_ cell: PostFeedCell, for postId: Int, _ viewWidth: CGFloat, _ maxCells: Int) {
+    func configureData(_ cell: PostFeedCell, for postId: Int, _ viewWidth: CGFloat) {
         if cellWidths[postId] == nil {
             let intrinsicPreviewTextWidth = cell.postPreviewTextLabel.intrinsicContentSize.width
             cellWidths[postId] = intrinsicPreviewTextWidth

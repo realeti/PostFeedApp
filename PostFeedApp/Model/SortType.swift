@@ -8,6 +8,6 @@
 import Foundation
 
 enum SortType: Int {
-    case newest = 0
     case rating
+    case newest
 }

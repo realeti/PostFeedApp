@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     let expandableCellStorage = ExpandableCellStorage()
     var postData: [PostFeed] = []
@@ -36,11 +37,33 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     }
     
     private func setupUI() {
+        setupFilterButton()
         title = Constants.mainTitle
         
         let cellIdentifier = Constants.customCellId
         let customCellTypeNib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    func setupFilterButton() {
+        let ratingAction = UIAction(title: Constants.filterMenuRatingName, image: UIImage(systemName: "heart")) { action in
+            self.currentSortType = .rating
+            self.sortPostData(sortType: self.currentSortType!)
+        }
+        
+        let dateAction = UIAction(title: Constants.filterMenuDateName, image: UIImage(systemName: "clock")) { action in
+            self.currentSortType = .newest
+            self.sortPostData(sortType: self.currentSortType!)
+        }
+        
+        let menuBarButton = UIBarButtonItem(
+            title: "",
+            image: UIImage(named: "icon-filter-bubbles"),
+            primaryAction: nil,
+            menu: UIMenu(title: Constants.filterMenuTitle, children: [ratingAction, dateAction])
+        )
+        
+        self.navigationItem.rightBarButtonItem = menuBarButton
     }
     
     func loadNetworkData() {
@@ -72,13 +95,17 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let filterVC = segue.destination as? FilterViewController else { return }
-        filterVC.delegate = self
-        
-        if let currentSortType {
-            filterVC.currentSortType = currentSortType
+    func sortPostData(sortType: SortType) {
+        switch sortType {
+        case .newest:
+            postData.sort { $0.timeshamp > $1.timeshamp }
+        case .rating:
+            postData.sort { $0.likesCount > $1.likesCount }
         }
+        
+        currentSortType = sortType
+        
+        tableView.reloadData()
     }
 }
 
@@ -120,7 +147,7 @@ extension MainViewController: UITableViewDataSource {
         cell.delegate = self
         
         let viewWidth = self.view.frame.size.width - 32 // leading & trailling it's 16 + 16
-        expandableCellStorage.configureData(cell, for: postId, viewWidth, postData.count)
+        expandableCellStorage.configureData(cell, for: postId, viewWidth)
         
         return cell
     }
@@ -130,21 +157,5 @@ extension MainViewController: PostFeedCellDelegate {
     func buttonPressed(indexPath: IndexPath, postId: Int) {
         expandableCellStorage.update(for: postId)
         tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
-}
-
-extension MainViewController: FilterViewControllerDelegate {
-    func sortPostData(sortType: SortType) {
-        switch sortType {
-        case .newest:
-            postData.sort { $0.timeshamp > $1.timeshamp }
-        case .rating:
-            postData.sort { $0.likesCount > $1.likesCount }
-        }
-        
-        currentSortType = sortType
-        
-        tableView.reloadData()
-        presentedViewController?.dismiss(animated: true)
     }
 }
