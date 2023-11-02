@@ -14,7 +14,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     
     let expandableCellStorage = ExpandableCellStorage()
     var postData: [PostFeed] = []
-    var currentSortType: SortType?
+    var currentSortType: SortType = .newest
     
     private lazy var fallbackController: PostFallbackController = {
         PostFallbackController(
@@ -37,7 +37,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     }
     
     private func setupUI() {
-        setupFilterButton()
+        generateFilterButton()
         title = Constants.mainTitle
         
         let cellIdentifier = Constants.customCellId
@@ -45,15 +45,26 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
         tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
     }
     
-    func setupFilterButton() {
-        let ratingAction = UIAction(title: Constants.filterMenuRatingName, image: UIImage(systemName: "heart")) { action in
-            self.currentSortType = .rating
-            self.sortPostData(sortType: self.currentSortType!)
-        }
+    func generateFilterButton() {
+        let ratingState = currentSortType == .rating
+        let dateState = currentSortType == .newest
         
-        let dateAction = UIAction(title: Constants.filterMenuDateName, image: UIImage(systemName: "clock")) { action in
-            self.currentSortType = .newest
-            self.sortPostData(sortType: self.currentSortType!)
+        let ratingAction = UIAction(
+            title: Constants.filterMenuRatingName,
+            image: UIImage(systemName: "heart"),
+            state: ratingState ? .on : .off) { action in
+                self.currentSortType = .rating
+                self.sortPostData(sortType: self.currentSortType)
+                self.generateFilterButton()
+            }
+        
+        let dateAction = UIAction(
+            title: Constants.filterMenuDateName,
+            image: UIImage(systemName: "clock"),
+            state: dateState ? .on : .off) { action in
+                self.currentSortType = .newest
+                self.sortPostData(sortType: self.currentSortType)
+                self.generateFilterButton()
         }
         
         let menuBarButton = UIBarButtonItem(
@@ -77,6 +88,8 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
             }
             
             DispatchQueue.main.async {
+                let sortType = self?.currentSortType ?? .newest
+                self?.sortPostData(sortType: sortType)
                 self?.tableView.reloadData()
             }
         }
