@@ -39,10 +39,17 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     private func setupUI() {
         generateFilterButton()
         title = Constants.mainTitle
+        navigationController?.navigationBar.barTintColor = UIColor(red: 29.0/255.0, green: 32.0/255.0, blue: 40.0/255.0, alpha: 1.0)
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
         
         let cellIdentifier = Constants.customCellId
         let customCellTypeNib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor(red: 29.0/255.0, green: 32.0/255.0, blue: 40.0/255.0, alpha: 1.0)
     }
     
     func generateFilterButton() {
@@ -68,7 +75,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
         }
         
         let menuBarButton = UIBarButtonItem(
-            title: "",
+            title: nil,
             image: UIImage(named: "icon-filter-bubbles"),
             primaryAction: nil,
             menu: UIMenu(title: Constants.filterMenuTitle, children: [ratingAction, dateAction])
@@ -158,6 +165,7 @@ extension MainViewController: UITableViewDataSource {
         cell.cellIndexPath = indexPath
         cell.postId = postId
         cell.delegate = self
+        cell.selectionStyle = .none
         
         let viewWidth = self.view.frame.size.width - 32 // leading & trailling it's 16 + 16
         expandableCellStorage.configureData(cell, for: postId, viewWidth)

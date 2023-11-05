@@ -72,7 +72,10 @@ final class CoreDataController: FetchData {
                     timeshamp: Int(post.timeshamp),
                     title: post.title ?? "",
                     previewText: post.previewText ?? "",
-                    likesCount: Int(post.likesCount)
+                    likesCount: Int(post.likesCount),
+                    commentsCount: Int(post.commentsCount),
+                    authorName: post.authorName ?? "",
+                    authorAvatar: post.authorAvatar ?? ""
                 )
             }
             
@@ -108,6 +111,9 @@ final class CoreDataController: FetchData {
                 postFeedCD.title = post.title
                 postFeedCD.previewText = post.previewText
                 postFeedCD.likesCount = Int32(post.likesCount)
+                postFeedCD.commentsCount = Int32(post.commentsCount)
+                postFeedCD.authorName = post.authorName
+                postFeedCD.authorAvatar = post.authorAvatar
             }
             try? context.save()
         }

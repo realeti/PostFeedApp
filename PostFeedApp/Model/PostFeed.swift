@@ -13,4 +13,7 @@ struct PostFeed {
     let title: String
     let previewText: String
     let likesCount: Int
+    let commentsCount: Int
+    let authorName: String
+    let authorAvatar: String
 }

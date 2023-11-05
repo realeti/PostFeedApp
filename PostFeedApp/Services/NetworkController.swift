@@ -81,10 +81,12 @@ class NetworkController: PostsFetching, PostDetailFetching {
                              timeshamp: post.timeshamp,
                              title: post.title,
                              previewText: post.previewText,
-                             likesCount: post.likesCount
+                             likesCount: post.likesCount,
+                             commentsCount: post.commentsCount,
+                             authorName: post.authorName,
+                             authorAvatar: post.authorAvatar
                     )
                 }
-                
                 completion(.success(posts))
             } catch {
                 completion(.failure(error))

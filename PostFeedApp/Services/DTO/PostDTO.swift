@@ -17,6 +17,9 @@ struct PostFeedDTO: Codable {
     let title: String
     let previewText: String
     let likesCount: Int
+    let commentsCount: Int
+    let authorName: String
+    let authorAvatar: String
     
     enum CodingKeys: String, CodingKey {
         case postId = "postId"
@@ -24,5 +27,8 @@ struct PostFeedDTO: Codable {
         case title
         case previewText = "preview_text"
         case likesCount = "likes_count"
+        case commentsCount = "comments_count"
+        case authorName = "author_name"
+        case authorAvatar = "author_avatar"
     }
 }

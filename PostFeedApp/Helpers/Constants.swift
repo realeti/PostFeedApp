@@ -14,7 +14,7 @@ struct Constants {
     static let netErrorStoryboardName = "NetErrorScreen"
     static let netErrorViewControllerId = "NetErrorViewController"
     static let customCellId = "PostFeedCell"
-    static let mainTitle = "Post Feed"
+    static let mainTitle = "Post feed"
     static let buttonTitleSeeMore = "See More"
     static let buttonTitleSeeLess = "See Less"
     static let netErrorScreenTitle = "Wake up your connection !"
