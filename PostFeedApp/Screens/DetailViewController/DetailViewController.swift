@@ -15,11 +15,14 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var postNameLabel: UILabel!
+    @IBOutlet weak var detailPostView: UIView!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postLikesCountLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var heartImage: UIImageView!
     @IBOutlet weak var heartImageBottomConstraint: NSLayoutConstraint!
+    
+    var isLiked = false
     
     private lazy var fallbackController: PostDetailFallbackController = {
         PostDetailFallbackController(
@@ -39,6 +42,15 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
         
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        view.backgroundColor = UIColor(named: Constants.backgroundColor)
+        detailPostView.backgroundColor = UIColor(named: Constants.backgroundColor)
+        postTextView.backgroundColor = UIColor(named: Constants.backgroundColor)
+        
+        postTextView.textColor = UIColor(named: Constants.postTextColor)
+        heartImage.tintColor = isLiked ? UIColor(named: Constants.heartLikeColor) : UIColor(named: Constants.postRatingColor)
+        postLikesCountLabel.textColor = UIColor(named: Constants.postRatingColor)
+        postDateLabel.textColor = UIColor(named: Constants.postRatingColor)
     }
     
     private func setupUI() {
@@ -105,26 +117,41 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         guard let viewTag = sender?.view?.tag else { return }
-        setAnimation(viewTag: viewTag)
+        updateLikes(viewTag: viewTag)
     }
     
-    private func setAnimation(viewTag: Int) {
-        if viewTag == Constants.postFeedDetailHeartViewTag {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 6.0, options: [.autoreverse]) {
-                self.heartImageBottomConstraint.constant = 15
-                self.heartImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-                self.view.layoutIfNeeded()
-            } completion: { _ in
-                self.heartImageBottomConstraint.constant = 10
-                self.heartImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            }
+    func updateLikes(viewTag: Int) {
+        if viewTag == Constants.postFeedHeartViewTag {
+            let currentLikesCount = Int(postLikesCountLabel.text ?? "0") ?? 0
             
-            let currentLikesCount = Int(postLikesCountLabel.text ?? "0")
-            
-            if var currentLikesCount {
-                currentLikesCount += 1
-                postLikesCountLabel.text = String(currentLikesCount)
+            if isLiked {
+                removeLike(likesCount: currentLikesCount - 1)
+            } else {
+                //setLike(likesCount: currentLikesCount + 1)
             }
         }
+    }
+    
+    /*func setLike(likesCount: Int) {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 4.0, initialSpringVelocity: 6.0) {
+            self.heartImageCenterConstraint.constant = -5
+            self.heartImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            self.heartImage.tintColor = UIColor(named: Constants.heartLikeColor)
+            self.layoutIfNeeded()
+        } completion: { _ in
+            UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 4.0, initialSpringVelocity: 6.0) {
+                self.heartImageCenterConstraint.constant = 0
+                self.heartImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.layoutIfNeeded()
+            }
+        }
+        postLikesCountLabel.text = String(likesCount)
+        isLiked = true
+    }*/
+    
+    func removeLike(likesCount: Int) {
+        heartImage.tintColor = UIColor(named: Constants.postRatingColor)
+        postLikesCountLabel.text = String(likesCount)
+        isLiked = false
     }
 }

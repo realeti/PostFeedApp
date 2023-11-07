@@ -37,19 +37,17 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
     }
     
     private func setupUI() {
-        generateFilterButton()
-        title = Constants.mainTitle
-        navigationController?.navigationBar.barTintColor = UIColor(red: 29.0/255.0, green: 32.0/255.0, blue: 40.0/255.0, alpha: 1.0)
-        
-        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
-        navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        
         let cellIdentifier = Constants.customCellId
         let customCellTypeNib = UINib(nibName: cellIdentifier, bundle: nil)
+        
+        title = Constants.mainTitle
+        navigationController?.navigationBar.barTintColor = UIColor(named: Constants.backgroundColor)
+        
         tableView.register(customCellTypeNib, forCellReuseIdentifier: cellIdentifier)
+        tableView.backgroundColor = UIColor(named: Constants.backgroundColor)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor(red: 29.0/255.0, green: 32.0/255.0, blue: 40.0/255.0, alpha: 1.0)
+        
+        generateFilterButton()
     }
     
     func generateFilterButton() {
@@ -58,7 +56,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
         
         let ratingAction = UIAction(
             title: Constants.filterMenuRatingName,
-            image: UIImage(systemName: "heart"),
+            image: UIImage(systemName: Constants.filterLikeImage),
             state: ratingState ? .on : .off) { action in
                 self.currentSortType = .rating
                 self.sortPostData(sortType: self.currentSortType)
@@ -67,7 +65,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
         
         let dateAction = UIAction(
             title: Constants.filterMenuDateName,
-            image: UIImage(systemName: "clock"),
+            image: UIImage(systemName: Constants.filterDateImage),
             state: dateState ? .on : .off) { action in
                 self.currentSortType = .newest
                 self.sortPostData(sortType: self.currentSortType)
@@ -76,7 +74,7 @@ class MainViewController: UIViewController, NetErrorViewControllerDelegate {
         
         let menuBarButton = UIBarButtonItem(
             title: nil,
-            image: UIImage(named: "icon-filter-bubbles"),
+            image: UIImage(named: Constants.filterIcon),
             primaryAction: nil,
             menu: UIMenu(title: Constants.filterMenuTitle, children: [ratingAction, dateAction])
         )

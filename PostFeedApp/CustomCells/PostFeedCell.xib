@@ -31,7 +31,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="PostName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIk-Xl-ukA">
                                 <rect key="frame" x="80" y="15.000000000000002" width="165" height="22.666666666666671"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
-                                <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Oyw-Xq-9xp">
@@ -51,7 +50,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PostPreviewText" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvQ-gv-72t">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="PostPreviewText" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvQ-gv-72t">
                                 <rect key="frame" x="15" y="77.666666666666671" width="230" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGray2Color"/>
@@ -70,7 +69,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yux-o6-bjE">
                                 <rect key="frame" x="15.000000000000007" y="140" width="110.66666666666669" height="25"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="HKJ-zo-fgF">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="HKJ-zo-fgF">
                                         <rect key="frame" x="8" y="4.6666666666666572" width="16" height="16"/>
                                         <color key="tintColor" red="0.69019609689999994" green="0.69411766529999996" blue="0.7019608021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -88,11 +87,11 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xZi-SJ-83G" secondAttribute="trailing" constant="5" id="51D-Ya-U9r"/>
-                                    <constraint firstItem="xZi-SJ-83G" firstAttribute="centerY" secondItem="HKJ-zo-fgF" secondAttribute="centerY" id="D0C-mL-xju"/>
                                     <constraint firstAttribute="height" constant="25" id="Fce-vA-35z"/>
                                     <constraint firstItem="xZi-SJ-83G" firstAttribute="leading" secondItem="HKJ-zo-fgF" secondAttribute="trailing" constant="5" id="JC8-JG-fvg"/>
                                     <constraint firstItem="HKJ-zo-fgF" firstAttribute="centerY" secondItem="Yux-o6-bjE" secondAttribute="centerY" id="PHO-CU-yIc"/>
                                     <constraint firstItem="HKJ-zo-fgF" firstAttribute="leading" secondItem="Yux-o6-bjE" secondAttribute="leading" constant="8" id="c6h-hh-mTa"/>
+                                    <constraint firstItem="xZi-SJ-83G" firstAttribute="centerY" secondItem="Yux-o6-bjE" secondAttribute="centerY" id="gn8-Cg-0S5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eal-ei-0Df">
@@ -161,6 +160,7 @@
                 <outlet property="commentsImage" destination="TlO-s5-ctF" id="ehR-FZ-cks"/>
                 <outlet property="expandedButton" destination="JzU-PZ-Moa" id="spu-zb-obj"/>
                 <outlet property="heartImage" destination="HKJ-zo-fgF" id="ppX-li-c41"/>
+                <outlet property="heartImageCenterConstraint" destination="PHO-CU-yIc" id="q7T-ao-oLv"/>
                 <outlet property="likesCountView" destination="Yux-o6-bjE" id="6PC-Ny-EUW"/>
                 <outlet property="postAuthorImage" destination="3S4-je-m9g" id="goW-GT-w8u"/>
                 <outlet property="postAuthorLabel" destination="bht-Au-8UK" id="81u-X3-blb"/>
