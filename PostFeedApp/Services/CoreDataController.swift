@@ -133,7 +133,8 @@ final class CoreDataController: FetchData {
                     title: data.title ?? "",
                     text: data.text ?? "",
                     postImage: data.postImage ?? "",
-                    likesCount: Int(data.likesCount)
+                    likesCount: Int(data.likesCount),
+                    commentsCount: Int(data.commentsCount)
                 )
             }
             
@@ -169,6 +170,7 @@ final class CoreDataController: FetchData {
             postFeedDetailCD.text = post.text
             postFeedDetailCD.postImage = post.postImage
             postFeedDetailCD.likesCount = Int32(post.likesCount)
+            postFeedDetailCD.commentsCount = Int32(post.commentsCount)
             
             try? context.save()
         }

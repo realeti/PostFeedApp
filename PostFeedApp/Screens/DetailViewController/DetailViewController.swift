@@ -18,9 +18,13 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     @IBOutlet weak var detailPostView: UIView!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postLikesCountLabel: UILabel!
+    @IBOutlet weak var postCommentsCountLabel: UILabel!
     @IBOutlet weak var postDateLabel: UILabel!
     @IBOutlet weak var heartImage: UIImageView!
-    @IBOutlet weak var heartImageBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentsImage: UIImageView!
+    @IBOutlet weak var likesCountView: UIView!
+    @IBOutlet weak var commentsCountView: UIView!
+    @IBOutlet weak var heartImageCenterConstraint: NSLayoutConstraint!
     
     var isLiked = false
     
@@ -43,13 +47,23 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        view.backgroundColor = UIColor(named: Constants.backgroundColor)
-        detailPostView.backgroundColor = UIColor(named: Constants.backgroundColor)
-        postTextView.backgroundColor = UIColor(named: Constants.backgroundColor)
+        view.backgroundColor = UIColor(named: Constants.cellBackgroundColor)
+        detailPostView.backgroundColor = UIColor(named: Constants.cellBackgroundColor)
         
+        postTextView.backgroundColor = UIColor(named: Constants.cellBackgroundColor)
         postTextView.textColor = UIColor(named: Constants.postTextColor)
+        
+        likesCountView.backgroundColor = UIColor(named: Constants.backgroundColor)
+        likesCountView.layer.cornerRadius = 7
+        
+        commentsCountView.backgroundColor = UIColor(named: Constants.backgroundColor)
+        commentsCountView.layer.cornerRadius = 7
+        
         heartImage.tintColor = isLiked ? UIColor(named: Constants.heartLikeColor) : UIColor(named: Constants.postRatingColor)
+        commentsImage.tintColor = UIColor(named: Constants.postRatingColor)
+        
         postLikesCountLabel.textColor = UIColor(named: Constants.postRatingColor)
+        postCommentsCountLabel.textColor = UIColor(named: Constants.postRatingColor)
         postDateLabel.textColor = UIColor(named: Constants.postRatingColor)
     }
     
@@ -67,7 +81,8 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
                     post.text,
                     post.likesCount,
                     post.timeshamp,
-                    post.postImage
+                    post.postImage,
+                    post.commentsCount
                 )
             } catch {
                 self?.showErrorScreen(error.localizedDescription)
@@ -88,7 +103,7 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
         }
     }
     
-    private func configureUI(_ postName: String, _ postText: String, _ postLikesCount: Int, _ postDate: Int, _ postImage: String) {
+    private func configureUI(_ postName: String, _ postText: String, _ postLikesCount: Int, _ postDate: Int, _ postImage: String, _ postCommentsCount: Int) {
         DispatchQueue.main.async {
             let date = Date(timeIntervalSince1970: Double(postDate))
             
@@ -96,6 +111,7 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
             self.postTextView.text = postText
             self.postLikesCountLabel.text = String(postLikesCount)
             self.postDateLabel.text = date.fullDateDisplay
+            self.postCommentsCountLabel.text = String(postCommentsCount)
         }
         
         loadImage(image: postImage)
@@ -121,33 +137,33 @@ class DetailViewController: UIViewController, NetErrorViewControllerDelegate {
     }
     
     func updateLikes(viewTag: Int) {
-        if viewTag == Constants.postFeedHeartViewTag {
+        if viewTag == Constants.postFeedDetailHeartViewTag {
             let currentLikesCount = Int(postLikesCountLabel.text ?? "0") ?? 0
             
             if isLiked {
                 removeLike(likesCount: currentLikesCount - 1)
             } else {
-                //setLike(likesCount: currentLikesCount + 1)
+                setLike(likesCount: currentLikesCount + 1)
             }
         }
     }
     
-    /*func setLike(likesCount: Int) {
+    func setLike(likesCount: Int) {
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 4.0, initialSpringVelocity: 6.0) {
             self.heartImageCenterConstraint.constant = -5
             self.heartImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             self.heartImage.tintColor = UIColor(named: Constants.heartLikeColor)
-            self.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         } completion: { _ in
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 4.0, initialSpringVelocity: 6.0) {
                 self.heartImageCenterConstraint.constant = 0
                 self.heartImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                self.layoutIfNeeded()
+                self.view.layoutIfNeeded()
             }
         }
         postLikesCountLabel.text = String(likesCount)
         isLiked = true
-    }*/
+    }
     
     func removeLike(likesCount: Int) {
         heartImage.tintColor = UIColor(named: Constants.postRatingColor)

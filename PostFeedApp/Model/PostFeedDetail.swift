@@ -14,4 +14,5 @@ struct PostFeedDetail {
     let text: String
     let postImage: String
     let likesCount: Int
+    let commentsCount: Int
 }

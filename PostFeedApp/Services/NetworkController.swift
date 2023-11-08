@@ -108,7 +108,8 @@ class NetworkController: PostsFetching, PostDetailFetching {
                                                 title: detailPostDto.title,
                                                 text: detailPostDto.text,
                                                 postImage: detailPostDto.postImage,
-                                                likesCount: detailPostDto.likesCount
+                                                likesCount: detailPostDto.likesCount,
+                                                commentsCount: detailPostDto.commentsCount
                 )
                 
                 completion(.success(detailPost))

@@ -18,6 +18,7 @@ struct PostFeedDetailDTO: Codable {
     let text: String
     let postImage: String
     let likesCount: Int
+    let commentsCount: Int
     
     enum CodingKeys: String, CodingKey {
         case postId
@@ -26,5 +27,6 @@ struct PostFeedDetailDTO: Codable {
         case text
         case postImage
         case likesCount = "likes_count"
+        case commentsCount = "comments_count"
     }
 }

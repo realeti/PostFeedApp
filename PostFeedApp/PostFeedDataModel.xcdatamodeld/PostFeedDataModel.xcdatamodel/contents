@@ -11,6 +11,7 @@
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <entity name="PostFeedDetailCD" representedClassName=".PostFeedDetailCD" syncable="YES" codeGenerationType="class">
+        <attribute name="commentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="postId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="postImage" optional="YES" attributeType="String"/>
